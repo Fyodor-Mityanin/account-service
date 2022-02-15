@@ -1,15 +1,21 @@
 package com.pet.accountservice.entity;
 
+import com.pet.accountservice.config.Config;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
 public class User {
+    @NotNull
     @Id
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
     @Column(name = "name")
@@ -18,6 +24,7 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
 
+    @Email(regexp = Config.emailRegex)
     @Column(name = "email")
     private String email;
 
