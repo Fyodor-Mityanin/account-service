@@ -1,33 +1,37 @@
 package com.pet.accountservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pet.accountservice.config.Config;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "user")
 public class User {
-    @NotNull
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "name")
+    @NotEmpty
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "lastname")
+    @NotEmpty
+    @Column(name = "lastname", nullable = false)
     private String lastname;
 
-    @Email(regexp = Config.emailRegex)
-    @Column(name = "email")
+    @NotEmpty
+    @Email(regexp = "^[A-Za-z0-9._%+-]+@acme.com$")
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password")
+    @JsonIgnore
+    @Column(name = "password", nullable = false)
     private String password;
 
     public Long getId() {
