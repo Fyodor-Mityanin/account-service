@@ -31,6 +31,7 @@ public class User {
     private String email;
 
     @JsonIgnore
+    @NotEmpty
     @Column(name = "password", nullable = false)
     private String password;
 
